@@ -10,8 +10,8 @@ use App\Models\ComplaintCategory;
 class AdminComplaintController extends Controller
 {
     public function index(){
-        $complaints = Complaint::with(['complaintCategory', 'user'])->orderBy('created_at')->get();
-        // dd($complaints);
+        $approved = Complaint::with(['complaintCategory', 'user'])->orderBy('created_at')->get();
+        
 
         return view('pages.complaint.index', compact('complaints'));
     }
