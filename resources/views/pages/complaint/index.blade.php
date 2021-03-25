@@ -58,7 +58,6 @@
                     <!-- Tab panes -->
                     <div class="tab-content p-3">
                         <div class="tab-pane active" id="home" role="tabpanel">
-                            <p class="mb-0">
                             <table id="complaint-table" class="table table-bordered dt-responsive nowrap"
                                 style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                 <thead>
@@ -75,44 +74,87 @@
                                     @php
                                         $no = 1;
                                     @endphp
-                                    @foreach ($complaints as $complaint)
+                                    @foreach ($waiting as $w)
                                         <tr>
                                             <td>{{ $no++ }}</td>
-                                            <td>{{ $complaint->complaint_content }}</td>
-                                            <td>{{ $complaint->complaintCategory->complaint_category_name }}</td>
-                                            <td>{{ $complaint->user->name }}</td>
-                                            <td>{{ $complaint->status }}</td>
+                                            <td>{{ $w->complaint_content }}</td>
+                                            <td>{{ $w->complaintCategory->complaint_category_name }}</td>
+                                            <td>{{ $w->user->name }}</td>
+                                            <td>{{ $w->status }}</td>
                                             <td>
-                                                <a href="{{ route('complaint.show', $complaint->id) }}"
+                                                <a href="{{ route('complaint.show', $w->id) }}"
                                                     class="btn btn-success btn-sm">Detail</a>
                                             </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
                             </table>
-                            </p>
                         </div>
                         <div class="tab-pane" id="profile" role="tabpanel">
-                            <p class="mb-0">
-                                Food truck fixie locavore, accusamus mcsweeney's marfa nulla
-                                single-origin coffee squid. Exercitation +1 labore velit, blog
-                                sartorial PBR leggings next level wes anderson artisan four loko
-                                farm-to-table craft beer twee. Qui photo booth letterpress,
-                                commodo enim craft beer mlkshk aliquip jean shorts ullamco ad
-                                vinyl cillum PBR. Homo nostrud organic, assumenda labore
-                                aesthetic magna delectus mollit.
-                            </p>
+                            <table id="complaint-table" class="table table-bordered dt-responsive nowrap"
+                                style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Aduan</th>
+                                        <th>Kategori Aduan</th>
+                                        <th>User</th>
+                                        <th>Status</th>
+                                        <th>Detail</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @php
+                                        $no = 1;
+                                    @endphp
+                                    @foreach ($approved as $a)
+                                        <tr>
+                                            <td>{{ $no++ }}</td>
+                                            <td>{{ $a->complaint_content }}</td>
+                                            <td>{{ $a->complaintCategory->complaint_category_name }}</td>
+                                            <td>{{ $a->user->name }}</td>
+                                            <td>{{ $a->status }}</td>
+                                            <td>
+                                                <a href="{{ route('complaint.show', $a->id) }}"
+                                                    class="btn btn-success btn-sm">Detail</a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
                         </div>
                         <div class="tab-pane" id="messages" role="tabpanel">
-                            <p class="mb-0">
-                                Etsy mixtape wayfarers, ethical wes anderson tofu before they
-                                sold out mcsweeney's organic lomo retro fanny pack lo-fi
-                                farm-to-table readymade. Messenger bag gentrify pitchfork
-                                tattooed craft beer, iphone skateboard locavore carles etsy
-                                salvia banksy hoodie helvetica. DIY synth PBR banksy irony.
-                                Leggings gentrify squid 8-bit cred pitchfork. Williamsburg banh
-                                mi whatever gluten-free.
-                            </p>
+                            <table id="complaint-table" class="table table-bordered dt-responsive nowrap"
+                                style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Aduan</th>
+                                        <th>Kategori Aduan</th>
+                                        <th>User</th>
+                                        <th>Status</th>
+                                        <th>Detail</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @php
+                                        $no = 1;
+                                    @endphp
+                                    @foreach ($declines as $d)
+                                        <tr>
+                                            <td>{{ $no++ }}</td>
+                                            <td>{{ $d->complaint_content }}</td>
+                                            <td>{{ $d->complaintCategory->complaint_category_name }}</td>
+                                            <td>{{ $d->user->name }}</td>
+                                            <td>{{ $d->status }}</td>
+                                            <td>
+                                                <a href="{{ route('complaint.show', $d->id) }}"
+                                                    class="btn btn-success btn-sm">Detail</a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

@@ -10,10 +10,13 @@ use App\Models\ComplaintCategory;
 class AdminComplaintController extends Controller
 {
     public function index(){
-        $approved = Complaint::with(['complaintCategory', 'user'])->orderBy('created_at')->get();
+        $waiting = Complaint::with(['complaintCategory', 'user'])->where('status', 'Waiting')->orderBy('created_at')->get();
+        $approved = Complaint::with(['complaintCategory', 'user'])->where('status', 'Approved')->orderBy('created_at')->get();
+        $declines = Complaint::with(['complaintCategory', 'user'])->where('status', 'Decline')->orderBy('created_at')->get();
+        
         
 
-        return view('pages.complaint.index', compact('complaints'));
+        return view('pages.complaint.index', compact('approved', 'waiting', 'declines'));
     }
 
     public function show($id){
