@@ -19,8 +19,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
 
-// Category Complaint
-Route::resource('/complaint-category','Admin\AdminCategoryComplaintController');
-Route::resource('/complaint','Admin\AdminComplaintController');
+Route::group(['middleware' => 'auth'], function(){
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::resource('/complaint-category','Admin\AdminCategoryComplaintController');
+    Route::resource('/complaint','Admin\AdminComplaintController');
+});
+
