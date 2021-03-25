@@ -19,16 +19,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 //Authentication
-Route::post('/login', 'Restful\UserController@login');
-Route::post('/register', 'Restful\UserController@register');
+Route::post('/login', 'Restful\UserController@loginMobile');
+Route::post('/register', 'Restful\UserController@registerMobile');
 
 Route::group(['middleware' => 'auth:api'], function(){
 
-    // Complaint Categories
-    Route::get('/complaint-category', 'Restful\ComplaintCategoryController@index');
-    Route::post('/complaint-category', 'Restful\ComplaintCategoryController@store');
-    Route::put('/complaint-category/{id}','Restful\ComplaintCategoryController@update');
-    Route::delete('/complaint-category/{id}', 'Restful\ComplaintCategoryController@destroy');
+    
 
     // Complaints
     Route::get('/complaint', 'Restful\ComplaintController@index');
@@ -38,3 +34,9 @@ Route::group(['middleware' => 'auth:api'], function(){
 
     Route::post('/details', 'Restful\UserController@details');
 });
+
+// Complaint Categories
+Route::get('/complaint-category', 'Restful\ComplaintCategoryController@index');
+Route::post('/complaint-category', 'Restful\ComplaintCategoryController@store');
+Route::put('/complaint-category/{id}','Restful\ComplaintCategoryController@update');
+Route::delete('/complaint-category/{id}', 'Restful\ComplaintCategoryController@destroy');

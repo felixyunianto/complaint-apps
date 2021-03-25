@@ -10,7 +10,7 @@ use Validator;
 
 class UserController extends Controller
 {
-    public function login(Request $request){
+    public function loginMobile(Request $request){
         
         if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
             $user = Auth::user();
@@ -30,7 +30,7 @@ class UserController extends Controller
         }
     }
 
-    public function register(Request $request){
+    public function registerMobile(Request $request){
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required | email',
@@ -46,7 +46,15 @@ class UserController extends Controller
             ], 401);
         }
 
+        $findUser = User::where('email', $request->email)->first();
 
+        if($findUser !== null){
+            return response()->json([
+                'message' => 'Error',
+                'status' => 422,
+                'error' => 'Email is already exists'
+            ], 402);
+        }
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
