@@ -23,11 +23,14 @@ Route::post('/login', 'Restful\UserController@loginMobile');
 Route::post('/register', 'Restful\UserController@registerMobile');
 
 Route::group(['middleware' => 'auth:api'], function(){
-
-    
-
     // Complaints
     Route::get('/complaint', 'Restful\ComplaintController@index');
+    Route::get('/complaint/approved', 'Restful\ComplaintController@indexApproved');
+    Route::get('/complaint/decline', 'Restful\ComplaintController@indexDecline');
+    Route::get('/complaint/waiting', 'Restful\ComplaintController@indexWaiting');
+
+    Route::get('/complaint/{id}', 'Restful\ComplaintController@show');
+
     Route::post('/complaint', 'Restful\ComplaintController@store');
     Route::put('/complaint/{id}', 'Restful\ComplaintController@update');
     Route::delete('/complaint/{id}', 'Restful\ComplaintController@destroy');
