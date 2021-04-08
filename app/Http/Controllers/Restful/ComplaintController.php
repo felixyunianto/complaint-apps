@@ -10,42 +10,98 @@ use Illuminate\Support\Facades\Auth;
 class ComplaintController extends Controller
 {
     public function index(){
-        $complaints = Complaint::with('complaintCategory')->orderBy('created_at')->get();
+        $complaints = Complaint::with('complaintCategory','user')->orderBy('created_at')->get();
+
+        $results = array();
+        foreach($complaints as $complaint){
+            $results[] = [
+                'id' => $complaint->id,
+                'complaint_category' => $complaint->complaintCategory->complaint_category_name,
+                'complaint_content' => $complaint->complaint_content,
+                'user' => $complaint->user->name,
+                'status' => $complaint->status,
+                'content_image' => $complaint->content_image,
+                'created_at' => $complaint->created_at,
+                'updated_at' => $complaint->updated_at
+            ];
+        }
 
         return response()->json([
             "message" => 'Success Get Complaint',
             "status" => 200,
-            "data" => $complaints
+            "data" => $results
         ]);
     }
 
     public function indexApproved(){
-        $approved = Complaint::with('complaintCategory')->where('status', 'Approved')->orderBy('created_at')->get();
+        $complaints = Complaint::with('complaintCategory','user')->where('status', 'Approved')->orderBy('created_at')->get();
+
+        $results = array();
+        foreach($complaints as $complaint){
+            $results[] = [
+                'id' => $complaint->id,
+                'complaint_category' => $complaint->complaintCategory->complaint_category_name,
+                'complaint_content' => $complaint->complaint_content,
+                'user' => $complaint->user->name,
+                'status' => $complaint->status,
+                'content_image' => $complaint->content_image,
+                'created_at' => $complaint->created_at,
+                'updated_at' => $complaint->updated_at
+            ];
+        }
 
         return response()->json([
             "message" => 'Success Get Approved Complaint',
             "status" => 200,
-            "data" => $approved
+            "data" => $results
         ]);
     }
 
     public function indexDecline(){
-        $decline = Complaint::with('complaintCategory')->where('status', 'Decline')->orderBy('created_at')->get();
+        $complaints = Complaint::with('complaintCategory','user')->where('status', 'Decline')->orderBy('created_at')->get();
+
+        $results = array();
+        foreach($complaints as $complaint){
+            $results[] = [
+                'id' => $complaint->id,
+                'complaint_category' => $complaint->complaintCategory->complaint_category_name,
+                'complaint_content' => $complaint->complaint_content,
+                'user' => $complaint->user->name,
+                'status' => $complaint->status,
+                'content_image' => $complaint->content_image,
+                'created_at' => $complaint->created_at,
+                'updated_at' => $complaint->updated_at
+            ];
+        }
 
         return response()->json([
             "message" => 'Success Get Decline Complaint',
             "status" => 200,
-            "data" => $decline
+            "data" => $results
         ]);
     }
 
     public function indexWaiting(){
-        $waiting = Complaint::with('complaintCategory')->where('status', 'Waiting')->orderBy('created_at')->get();
+        $complaints = Complaint::with('complaintCategory','user')->where('status', 'Waiting')->orderBy('created_at')->get();
+
+        $results = array();
+        foreach($complaints as $complaint){
+            $results[] = [
+                'id' => $complaint->id,
+                'complaint_category' => $complaint->complaintCategory->complaint_category_name,
+                'complaint_content' => $complaint->complaint_content,
+                'user' => $complaint->user->name,
+                'status' => $complaint->status,
+                'content_image' => $complaint->content_image,
+                'created_at' => $complaint->created_at,
+                'updated_at' => $complaint->updated_at
+            ];
+        }
 
         return response()->json([
             "message" => 'Success Get Waiting Complaint',
             "status" => 200,
-            "data" => $waiting
+            "data" => $results
         ]);
     }
 

@@ -22,9 +22,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('/login', 'Restful\UserController@loginMobile');
 Route::post('/register', 'Restful\UserController@registerMobile');
 
+Route::get('/complaint', 'Restful\ComplaintController@index');
 Route::group(['middleware' => 'auth:api'], function(){
     // Complaints
-    Route::get('/complaint', 'Restful\ComplaintController@index');
     Route::get('/complaint/approved', 'Restful\ComplaintController@indexApproved');
     Route::get('/complaint/decline', 'Restful\ComplaintController@indexDecline');
     Route::get('/complaint/waiting', 'Restful\ComplaintController@indexWaiting');
