@@ -21,8 +21,8 @@ class ComplaintController extends Controller
                 'user' => $complaint->user->name,
                 'status' => $complaint->status,
                 'content_image' => $complaint->content_image,
-                'created_at' => $complaint->created_at,
-                'updated_at' => $complaint->updated_at
+                'created_at' => $complaint->created_at->diffForHumans(),
+                'updated_at' => $complaint->updated_at->diffForHumans()
             ];
         }
 
@@ -45,8 +45,8 @@ class ComplaintController extends Controller
                 'user' => $complaint->user->name,
                 'status' => $complaint->status,
                 'content_image' => $complaint->content_image,
-                'created_at' => $complaint->created_at,
-                'updated_at' => $complaint->updated_at
+                'created_at' => $complaint->created_at->diffForHumans(),
+                'updated_at' => $complaint->updated_at->diffForHumans()
             ];
         }
 
@@ -69,8 +69,8 @@ class ComplaintController extends Controller
                 'user' => $complaint->user->name,
                 'status' => $complaint->status,
                 'content_image' => $complaint->content_image,
-                'created_at' => $complaint->created_at,
-                'updated_at' => $complaint->updated_at
+                'created_at' => $complaint->created_at->diffForHumans(),
+                'updated_at' => $complaint->updated_at->diffForHumans()
             ];
         }
 
@@ -93,8 +93,8 @@ class ComplaintController extends Controller
                 'user' => $complaint->user->name,
                 'status' => $complaint->status,
                 'content_image' => $complaint->content_image,
-                'created_at' => $complaint->created_at,
-                'updated_at' => $complaint->updated_at
+                'created_at' => $complaint->created_at->diffForHumans(),
+                'updated_at' => $complaint->updated_at->diffForHumans()
             ];
         }
 
