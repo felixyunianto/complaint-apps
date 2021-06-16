@@ -22,7 +22,7 @@ class ComplaintController extends Controller
                 'complaint_content' => $complaint->complaint_content,
                 'user' => $complaint->user->name,
                 'status' => $complaint->status,
-                'content_image' => $complaint->content_image,
+                'complaint_image' => $complaint->complaint_image,
                 'created_at' => $complaint->created_at->diffForHumans(),
                 'updated_at' => $complaint->updated_at->diffForHumans()
             ];
@@ -46,7 +46,7 @@ class ComplaintController extends Controller
                 'complaint_content' => $complaint->complaint_content,
                 'user' => $complaint->user->name,
                 'status' => $complaint->status,
-                'content_image' => $complaint->content_image,
+                'complaint_image' => $complaint->complaint_image,
                 'created_at' => $complaint->created_at->diffForHumans(),
                 'updated_at' => $complaint->updated_at->diffForHumans()
             ];
@@ -70,7 +70,7 @@ class ComplaintController extends Controller
                 'complaint_content' => $complaint->complaint_content,
                 'user' => $complaint->user->name,
                 'status' => $complaint->status,
-                'content_image' => $complaint->content_image,
+                'complaint_image' => $complaint->complaint_image,
                 'created_at' => $complaint->created_at->diffForHumans(),
                 'updated_at' => $complaint->updated_at->diffForHumans()
             ];
@@ -94,7 +94,7 @@ class ComplaintController extends Controller
                 'complaint_content' => $complaint->complaint_content,
                 'user' => $complaint->user->name,
                 'status' => $complaint->status,
-                'content_image' => $complaint->content_image,
+                'complaint_image' => $complaint->complaint_image,
                 'created_at' => $complaint->created_at->diffForHumans(),
                 'updated_at' => $complaint->updated_at->diffForHumans()
             ];
