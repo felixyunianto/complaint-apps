@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Complaint;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
+use Cloudinary;
 
 class ComplaintController extends Controller
 {
@@ -117,17 +119,18 @@ class ComplaintController extends Controller
 
     public function store(Request $request){
         $user = Auth::user();
-        $complaint_image = null;
+        $fileName = Carbon::now()->format('Y-m-d H:i:s').'-'.$request->nama;
 
-        if($request->complaint_image){
-            $complaint_image = $request->file('complaint_image')->store('complaint_image');
-        }
+        $uploadedFile = $request->file('complaint_image')->storeOnCloudinaryAs('Syaiful/Complaint',$fileName);
+        $complaint_image = $uploadedFile->getSecurePath();
+        $public_id = $uploadedFile->getPublicId();
 
         $complaints = Complaint::create([
             'complaint_category_id' => $request->complaint_category_id,
             'complaint_content' => $request->complaint_content,
             'user_id' => $user->id,
-            'complaint_image' => $complaint_image
+            'complaint_image' => $complaint_image,
+            'public_id' => $public_id
         ]);
 
         return response()->json([

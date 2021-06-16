@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use App\User;
 
 class UsersTableSeeder extends Seeder
 {
@@ -16,11 +17,15 @@ class UsersTableSeeder extends Seeder
             'role_name' => 'Admin'
         ]);
 
-        DB::table('users') ->insert([
+        $user = User::create([
             'name' => 'Administrator',
             'email' => 'admin@gmail.com',
             'password' => bcrypt(12345678),
             'role_id' => 1
         ]);
+
+        $user->createToken('BanjarAnyar')->accessToken;
+
+        
     }
 }

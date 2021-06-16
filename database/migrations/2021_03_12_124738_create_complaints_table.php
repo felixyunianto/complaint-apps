@@ -21,6 +21,7 @@ class CreateComplaintsTable extends Migration
             $table->bigInteger('user_id')->unsigned();
             $table->enum('status', ['Waiting', 'Approved', 'Decline'])->default('Waiting');
             $table->text('complaint_image')->nullable();
+            $table->text('public_id')->nullable();
             $table->timestamps();
 
             $table->foreign('complaint_category_id')->references('id')->on('complaint_categories')->onDelete('CASCADE');

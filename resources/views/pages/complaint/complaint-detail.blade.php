@@ -69,7 +69,7 @@
                         <form id="form-status" method="POST" action="{{ route('complaint.update', $complaint->id) }}">
                             @csrf
                             <input type="hidden" name="_method" value="PUT">
-                            <input type="text" name="status" id="field-status">
+                            <input type="hidden" name="status" id="field-status">
                         </form>
                         <button class="btn btn-primary btn-sm" id="btn-confirm">Konfirmasi</button>
                         <button class="btn btn-danger btn-sm" id="btn-decline">Tolak</button>
