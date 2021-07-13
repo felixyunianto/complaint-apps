@@ -24,8 +24,8 @@ class CreateComplaintsTable extends Migration
             $table->text('public_id')->nullable();
             $table->timestamps();
 
-            $table->foreign('complaint_category_id')->references('id')->on('complaint_categories')->onDelete('CASCADE');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('CASCADE');
+            $table->foreign('complaint_category_id')->references('id')->on('complaint_categories')->onDelete('CASCADE')->onUpdate('CASCADE');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('CASCADE')->onUpdate('CASCADE');
         });
     }
 

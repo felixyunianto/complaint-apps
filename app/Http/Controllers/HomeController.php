@@ -32,11 +32,11 @@ class HomeController extends Controller
         $month = [0,0,0,0,0,0,0,0,0,0,0,0];
         $chart = Complaint::select(
             \DB::raw('count(*) as total'),
-            \DB::raw('MONTH(created_at) as months')
-        )->groupBy('months')->get();
+            \DB::raw('month')
+        )->groupBy('month')->get();
 
         foreach($chart as $c) {
-            $month[$c->months-1] = $c->total;
+            $month[$c->month-1] = $c->total;
         }
 
         // dd($month);

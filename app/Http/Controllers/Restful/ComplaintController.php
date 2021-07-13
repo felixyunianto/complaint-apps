@@ -130,7 +130,8 @@ class ComplaintController extends Controller
             'complaint_content' => $request->complaint_content,
             'user_id' => $user->id,
             'complaint_image' => $complaint_image,
-            'public_id' => $public_id
+            'public_id' => $public_id,
+            'month' => Carbon::now()->month
         ]);
 
         return response()->json([

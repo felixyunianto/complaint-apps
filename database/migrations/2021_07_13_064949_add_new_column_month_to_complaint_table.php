@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddColumnRoleToUsers extends Migration
+class AddNewColumnMonthToComplaintTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,8 @@ class AddColumnRoleToUsers extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->bigInteger('role_id')->unsigned()->after('password')->nullable();
-
-            $table->foreign('role_id')->references('id')->on('roles')->onDelete('CASCADE')->onUpdate('CASCADE');
+        Schema::table('complaints', function (Blueprint $table) {
+            $table->integer('month')->after('public_id');
         });
     }
 
@@ -27,7 +25,7 @@ class AddColumnRoleToUsers extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table('complaints', function (Blueprint $table) {
             //
         });
     }
