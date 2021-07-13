@@ -9,25 +9,22 @@
                 <li class="menu-title">Menu</li>
 
                 <li>
-                    <a href="/home" class="waves-effect">
-                        <div class="d-inline-block icons-sm mr-1"><i class="uim uim-airplay"></i></div><span
-                            class="badge badge-pill badge-success float-right">3</span>
+                    <a href="/" class="waves-effect">
+                        <div class="d-inline-block icons-sm mr-1"><i class="uim uim-airplay"></i></div>
                         <span>Dashboard</span>
                     </a>
                 </li>
 
                 <li>
                     <a href="{{ route('complaint-category.index') }}" class="waves-effect">
-                        <div class="d-inline-block icons-sm mr-1"><i class="uim uim-airplay"></i></div><span
-                            class="badge badge-pill badge-success float-right">3</span>
+                        <div class="d-inline-block icons-sm mr-1"><i class="uim uim-layer-group"></i></div>
                         <span>Category Complaint</span>
                     </a>
                 </li>
 
                 <li>
                     <a href="{{ route('complaint.index') }}" class="waves-effect">
-                        <div class="d-inline-block icons-sm mr-1"><i class="uim uim-airplay"></i></div><span
-                            class="badge badge-pill badge-success float-right">3</span>
+                        <div class="d-inline-block icons-sm mr-1"><i class="uim uim-comment-alt-dots"></i></div>
                         <span>Complaint</span>
                     </a>
                 </li>

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Complaint;
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,22 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $approve = Complaint::where('status', 'Approved')->get();
+        $waiting = Complaint::where('status', 'Waiting')->get();
+        $decline = Complaint::where('status', 'Decline')->get();
+
+        $month = [0,0,0,0,0,0,0,0,0,0,0,0];
+        $chart = Complaint::select(
+            \DB::raw('count(*) as total'),
+            \DB::raw('MONTH(created_at) as months')
+        )->groupBy('months')->get();
+
+        foreach($chart as $c) {
+            $month[$c->months-1] = $c->total;
+        }
+
+        // dd($month);
+
+        return view('home', compact('approve', 'waiting', 'decline', 'month'));
     }
 }

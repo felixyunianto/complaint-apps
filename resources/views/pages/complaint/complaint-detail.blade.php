@@ -1,30 +1,15 @@
 @extends('layouts.app')
 @section('content')
+    <link href="{{ asset('assets/libs/magnific-popup/magnific-popup.css') }}" rel="stylesheet" type="text/css" />
+
     <div class="page-title-box">
         <div class="container-fluid">
             <div class="row align-items-center">
                 <div class="col-md-8">
-                    <h4 class="page-title mb-1">Dashboard</h4>
+                    <h4 class="page-title mb-1">Detail Complaint</h4>
                     <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item active">Welcome to Xoric Dashboard</li>
+                        <li class="breadcrumb-item active">Welcome to Detail Complaint Page</li>
                     </ol>
-                </div>
-                <div class="col-md-4">
-                    <div class="float-right d-none d-md-block">
-                        <div class="dropdown">
-                            <button class="btn btn-light btn-rounded dropdown-toggle" type="button" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
-                                <i class="mdi mdi-settings-outline mr-1"></i> Settings
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <a class="dropdown-item" href="#">Something else here</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Separated link</a>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -61,7 +46,11 @@
                             <td>Gambar</td>
                             <td>:</td>
                             <td>
-                                <img src="{{ asset($complaint->complaint_image) }}" alt="" width="100px">
+                                <a class="image-popup-no-margins" href="{{ asset($complaint->complaint_image) }}">
+                                    <img class="img-fluid" src="{{ asset($complaint->complaint_image) }}" alt=""
+                                        width="100px">
+                                </a>
+
                             </td>
                         </tr>
                     </table>
@@ -81,14 +70,30 @@
     </div>
 @endsection
 @section('script')
+    <script src="{{ asset('assets/libs/magnific-popup/jquery.magnific-popup.min.js') }}"></script>
     <script>
-        $(document).ready(function(){
-            $('#btn-confirm').on('click', function(){
+        $(document).ready(function() {
+
+            $(".image-popup-no-margins").magnificPopup({
+                type: "image",
+                closeOnContentClick: !0,
+                closeBtnInside: !1,
+                fixedContentPos: !0,
+                mainClass: "mfp-no-margins mfp-with-zoom",
+                image: {
+                    verticalFit: !0
+                },
+                zoom: {
+                    enabled: !0,
+                    duration: 300
+                }
+            })
+            $('#btn-confirm').on('click', function() {
                 $('#field-status').val('Approved');
                 $('#form-status').submit();
             });
 
-            $('#btn-decline').on('click', function(){
+            $('#btn-decline').on('click', function() {
                 $('#field-status').val('Decline');
                 $('#form-status').submit();
             });
