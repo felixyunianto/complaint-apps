@@ -36,6 +36,7 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::delete('/complaint/{id}', 'Restful\ComplaintController@destroy');
 
     Route::post('/details', 'Restful\UserController@details');
+    Route::post('/save-token', 'Restful\UserController@saveDeviceToken');
 });
 
 // Complaint Categories
