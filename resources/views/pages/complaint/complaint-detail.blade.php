@@ -40,7 +40,7 @@
                         <tr>
                             <td>Tanggal</td>
                             <td>:</td>
-                            <td>{{ $complaint->created_at }}</td>
+                            <td>{{ date("d M Y", strtotime($complaint->created_at)) }}</td>
                         </tr>
                         <tr>
                             <td>Gambar</td>
