@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendEmail;
 use App\User;
 
 class UserController extends Controller
@@ -21,18 +23,23 @@ class UserController extends Controller
 
     public function update(Request $request, $id){
         $user = User::findOrFail($id);
-        $activeStatus = $user->in_active;
+        $activeStatus = $user->in_active;;
 
         if($activeStatus){
             $user->update([
                 'in_active' => false
             ]);
 
+            $sendmail = Mail::to($user->email)->send(new SendEmail($user,'unactivated'));
+
             return redirect()->route('user.index')->with('success', 'User has unactivated');
         }else{
             $user->update([
                 'in_active' => true
             ]);
+
+            $sendmail = Mail::to($user->email)->send(new SendEmail($user,'activated'));
+
             return redirect()->route('user.index')->with('success', 'User has activated');
         }
     }
