@@ -14,9 +14,7 @@ class AddNikToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->char('NIK', 16)->unsigned()->nullable();
-
-            $table->foreign('NIK')->references('NIK')->on('people')->onDelete('CASCADE')->onUpdate('CASCADE');
+            $table->char('NIK', 16)->unsigned()->nullable()->after('id');
         });
     }
 
