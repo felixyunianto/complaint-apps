@@ -85,6 +85,7 @@ class UserController extends Controller
             ], 422);
         }
         $user = User::create([
+            'NIK' => $findPerson->NIK,
             'name' => $findPerson->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
