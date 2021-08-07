@@ -108,6 +108,30 @@ class ComplaintController extends Controller
         ]);
     }
 
+    public function complaintByUser(){
+        $complaints = Complaint::with('complaintCategory','user')->where('user_id', auth()->user()->id)->orderBy('created_at')->get();
+
+        $results = array();
+        foreach($complaints as $complaint){
+            $results[] = [
+                'id' => $complaint->id,
+                'complaint_category' => $complaint->complaintCategory->complaint_category_name,
+                'complaint_content' => $complaint->complaint_content,
+                'user' => $complaint->user->name,
+                'status' => $complaint->status,
+                'complaint_image' => $complaint->complaint_image,
+                'created_at' => $complaint->created_at->diffForHumans(),
+                'updated_at' => $complaint->updated_at->diffForHumans()
+            ];
+        }
+
+        return response()->json([
+            "message" => 'Success Get Complaint By User',
+            "status" => 200,
+            "data" => $results
+        ]);
+    }
+
     public function show($id) {
         $complaints = Complaint::with('complaintCategory')->findOrFail($id);
 

@@ -37,6 +37,8 @@ Route::group(['middleware' => 'auth:api'], function(){
 
     Route::post('/details', 'Restful\UserController@details');
     Route::post('/save-token', 'Restful\UserController@saveDeviceToken');
+
+    Route::get('/complaint/by-user', 'Restful\ComplaintController@complaintByUser');
 });
 
 // Complaint Categories
