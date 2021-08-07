@@ -28,6 +28,7 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('/complaint/approved', 'Restful\ComplaintController@indexApproved');
     Route::get('/complaint/decline', 'Restful\ComplaintController@indexDecline');
     Route::get('/complaint/waiting', 'Restful\ComplaintController@indexWaiting');
+    Route::get('/complaint/by-user', 'Restful\ComplaintController@complaintByUser');
 
     Route::get('/complaint/{id}', 'Restful\ComplaintController@show');
 
@@ -37,8 +38,6 @@ Route::group(['middleware' => 'auth:api'], function(){
 
     Route::post('/details', 'Restful\UserController@details');
     Route::post('/save-token', 'Restful\UserController@saveDeviceToken');
-
-    Route::get('/complaint/by-user', 'Restful\ComplaintController@complaintByUser');
 });
 
 // Complaint Categories
