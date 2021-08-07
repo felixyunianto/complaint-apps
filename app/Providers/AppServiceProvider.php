@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use App\User;
+use Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -30,7 +31,10 @@ class AppServiceProvider extends ServiceProvider
             \URL::forceScheme('https');
         }
 
-        $user = User::where('in_active', false)->get();
-        View::share('user',$user);
+        $isColExists = Schema::connection(env('DB_CONNECTION'))->hasColumn('users', 'in_active');
+        if($isColExists){
+            $user = User::where('in_active', false)->get();
+            View::share('user',$user);
+        }
     }
 }
