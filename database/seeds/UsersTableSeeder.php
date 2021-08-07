@@ -21,7 +21,9 @@ class UsersTableSeeder extends Seeder
             'name' => 'Administrator',
             'email' => 'admin@gmail.com',
             'password' => bcrypt(12345678),
-            'role_id' => 1
+            'role_id' => 1,
+            'in_active' => true,
+            'NIK' => '1234567890123456'
         ]);
 
         $user->createToken('BanjarAnyar')->accessToken;

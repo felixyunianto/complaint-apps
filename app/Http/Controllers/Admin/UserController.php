@@ -4,39 +4,37 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Complaint;
-use App\Models\ComplaintCategory;
 use App\User;
 
-class AdminComplaintController extends Controller
+class UserController extends Controller
 {
-    public function index(){
-        $waiting = Complaint::with(['complaintCategory', 'user'])->where('status', 'Waiting')->orderBy('created_at')->get();
-        $approved = Complaint::with(['complaintCategory', 'user'])->where('status', 'Approved')->orderBy('created_at')->get();
-        $declines = Complaint::with(['complaintCategory', 'user'])->where('status', 'Decline')->orderBy('created_at')->get();
-        
-        return view('pages.complaint.index', compact('approved', 'waiting', 'declines'));
+    public function __construct(){
+        $this->middleware('auth');
     }
 
-    public function show($id){
-        $complaint = Complaint::with(['complaintCategory', 'user'])->findOrFail($id);
-        // dd($complaint);
+    public function index(){
+        $userNotActive = User::where('in_active', false)->where('role_id', NULL)->get();
+        $userActive = User::where('in_active', true)->where('role_id', NULL)->get();
 
-        return view('pages.complaint.complaint-detail', compact('complaint'));
+        return view('pages.user.index', compact('userActive', 'userNotActive'));
     }
 
     public function update(Request $request, $id){
-        $complaint = Complaint::findOrFail($id);
-        $complaint->update([
-            'status' => $request->status
-        ]);
+        $user = User::findOrFail($id);
+        $activeStatus = $user->in_active;
 
-        $deviceToken = User::whereNotNull('device_token')->pluck('device_token')->all();
-        // dd($deviceToken);
+        if($activeStatus){
+            $user->update([
+                'in_active' => false
+            ]);
 
-        $this->sendNotification("Pemberitahuan", "Pengaduan ".$complaint->complaint_content." telah di ".$request->status, $deviceToken);
-
-        return redirect()->route('complaint.index');
+            return redirect()->route('user.index')->with('success', 'User has unactivated');
+        }else{
+            $user->update([
+                'in_active' => true
+            ]);
+            return redirect()->route('user.index')->with('success', 'User has activated');
+        }
     }
 
     public function sendNotification($title, $body, $token){
@@ -86,5 +84,4 @@ class AdminComplaintController extends Controller
             'data' => json_encode($response)
         ], 200);
     }
-
 }

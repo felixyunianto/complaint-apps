@@ -14,7 +14,7 @@ class AddColumnDeviceTokenToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('device_token')->nullable()->after('password');
+            $table->text('device_token')->nullable()->after('password');
         });
     }
 

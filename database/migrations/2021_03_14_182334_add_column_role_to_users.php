@@ -15,6 +15,8 @@ class AddColumnRoleToUsers extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->bigInteger('role_id')->unsigned()->after('password')->nullable();
+            $table->char('NIK', 16);
+            $table->boolean('in_active')->after('role_id')->default(false);
 
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('CASCADE')->onUpdate('CASCADE');
         });

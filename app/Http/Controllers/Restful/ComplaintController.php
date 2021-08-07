@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Cloudinary;
+use App\Events\NotificationNewUser;
 
 class ComplaintController extends Controller
 {
@@ -131,8 +132,12 @@ class ComplaintController extends Controller
             'user_id' => $user->id,
             'complaint_image' => $complaint_image,
             'public_id' => $public_id,
-            'month' => Carbon::now()->month
+            'month' => Carbon::now()->month,
+            'latitude' => $request->latitude,
+            'longitude' => $request->longitude,
         ]);
+
+        event(new NotificationNewUser($complaints));
 
         return response()->json([
             "message" => 'Create a New Complaint is successful',

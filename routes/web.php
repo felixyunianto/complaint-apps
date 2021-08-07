@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Events\Contoh;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,4 +21,6 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/', 'HomeController@index')->name('home');
     Route::resource('/complaint-category','Admin\AdminCategoryComplaintController');
     Route::resource('/complaint','Admin\AdminComplaintController');
+    Route::resource('/person', 'Admin\PersonController');
+    Route::resource('/user', 'Admin\UserController');
 });

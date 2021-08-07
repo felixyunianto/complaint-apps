@@ -17,3 +17,10 @@
 <link href="{{ asset('assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
 <!-- App Css-->
 <link href="{{ asset('assets/css/app.min.css') }}" rel="stylesheet" type="text/css" />
+
+<!-- Sweet Alert-->
+<link href="{{ asset('assets/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
+
+<script src="{{ asset('assets/libs/jquery/jquery.min.js') }} "></script>
+{{-- Pusher --}}
+<script src="https://js.pusher.com/3.1/pusher.min.js"></script>

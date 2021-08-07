@@ -15,7 +15,7 @@ class CreateComplaintCategoriesTable extends Migration
     {
         Schema::create('complaint_categories', function (Blueprint $table) {
             $table->id();
-            $table->string('complaint_category_name');
+            $table->string('complaint_category_name', 50);
             $table->timestamps();
         });
     }

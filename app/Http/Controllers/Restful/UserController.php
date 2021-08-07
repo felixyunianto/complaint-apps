@@ -7,6 +7,8 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Validator;
+use App\Events\NotificationNewUser;
+use App\Person;
 
 class UserController extends Controller
 {
@@ -14,13 +16,20 @@ class UserController extends Controller
         
         if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
             $user = Auth::user();
-            $user['token'] = $user->createToken('BanjarAnyar')->accessToken;
+            if($user->in_active == true){
+                $user['token'] = $user->createToken('BanjarAnyar')->accessToken;
 
-            return response()->json([
-                'message' => 'Success Login',
-                'status' => 200,
-                'data' => $user
-            ],200);
+                return response()->json([
+                    'message' => 'Success Login',
+                    'status' => 200,
+                    'data' => $user
+                ],200);
+            }else{
+                return response()->json([
+                    'message' => 'Account is not active, contact admin for activation',
+                    'status' => 403
+                ],403);
+            }
         }else{ 
             return response()->json([
                 'message'=>'Error Login',
@@ -32,10 +41,10 @@ class UserController extends Controller
 
     public function registerMobile(Request $request){
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
+            'NIK' => 'required',
             'email' => 'required | email',
             'password' => 'required | min: 6',
-            'confirm_password' => 'required | same:password'
+            'confirm_password' => 'required | same:password',
         ]);
 
         if($validator->fails()){
@@ -46,20 +55,40 @@ class UserController extends Controller
             ], 401);
         }
 
+        $findPerson = Person::where('NIK', $request->NIK)->first();
+
+        if(!$findPerson){
+            return response()->json([
+                'message' => 'Error',
+                'status' => 403,
+                'error' => 'NIK invalid'
+            ], 403);
+        }
+
         $findUser = User::where('email', $request->email)->first();
+        $findNik = User::where('NIK', $request->NIK)->first();
+
+        if($findNik != null){
+            return response()->json([
+                'message' => 'Error',
+                'status' => 422,
+                'error' => 'NIK is already exists',
+            ], 409);
+        }
 
         if($findUser !== null){
             return response()->json([
                 'message' => 'Error',
                 'status' => 422,
                 'error' => 'Email is already exists'
-            ], 402);
+            ], 422);
         }
         $user = User::create([
-            'name' => $request->name,
+            'name' => $findPerson->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
-            'role_id' => $request->role_id
+            'role_id' => $request->role_id,
+            'NIK' => $request->NIK
         ]);
 
         $responseObject = [
@@ -67,6 +96,8 @@ class UserController extends Controller
             'email' => $user['email'],
             'token' => $user->createToken('BanjarAnyar')->accessToken
         ];
+
+        event(new NotificationNewUser($user));
 
         return response()->json([
             'message' => 'Register is successful',

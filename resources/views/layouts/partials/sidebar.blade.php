@@ -28,6 +28,20 @@
                         <span>Complaint</span>
                     </a>
                 </li>
+
+                <li>
+                    <a href="{{ route('person.index') }}" class="waves-effect">
+                        <div class="d-inline-block icons-sm mr-1"><i class="uim uim-cube"></i></div>
+                        <span>People</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ route('user.index') }}" class="waves-effect">
+                        <div class="d-inline-block icons-sm mr-1"><i class="uim uim-cube"></i></div>
+                        <span>User</span>
+                    </a>
+                </li>
             </ul>
         </div>
         <!-- Sidebar -->
