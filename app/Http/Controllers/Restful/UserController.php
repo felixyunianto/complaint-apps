@@ -26,8 +26,9 @@ class UserController extends Controller
                 ],200);
             }else{
                 return response()->json([
-                    'message' => 'Account is not active, contact admin for activation',
-                    'status' => 403
+                    'message'=>'Error Login',
+                    'status' => 403,
+                    'error' => 'Account is not active, contact admin for activation'
                 ],403);
             }
         }else{ 
