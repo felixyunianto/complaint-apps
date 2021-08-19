@@ -37,6 +37,12 @@
                                     class="d-none d-md-inline-block">Decline</span>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#finished" role="tab">
+                                <i class="fas fa-check-double mr-1"></i> <span
+                                    class="d-none d-md-inline-block">Finished</span>
+                            </a>
+                        </li>
                     </ul>
 
                     <!-- Tab panes -->
@@ -133,6 +139,39 @@
                                             <td>{{ $d->status }}</td>
                                             <td>
                                                 <a href="{{ route('complaint.show', $d->id) }}"
+                                                    class="btn btn-success btn-sm">Detail</a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane" id="finished" role="tabpanel">
+                            <table id="complaint-table-waiting" class="table table-bordered dt-responsive nowrap"
+                                style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Aduan</th>
+                                        <th>Kategori Aduan</th>
+                                        <th>User</th>
+                                        <th>Status</th>
+                                        <th>Detail</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @php
+                                        $no = 1;
+                                    @endphp
+                                    @foreach ($finished as $finish)
+                                        <tr>
+                                            <td>{{ $no++ }}</td>
+                                            <td>{{ $finish->complaint_content }}</td>
+                                            <td>{{ $finish->complaintCategory->complaint_category_name }}</td>
+                                            <td>{{ $finish->user->name }}</td>
+                                            <td>{{ $finish->status }}</td>
+                                            <td>
+                                                <a href="{{ route('complaint.show', $finish->id) }}"
                                                     class="btn btn-success btn-sm">Detail</a>
                                             </td>
                                         </tr>
