@@ -28,6 +28,7 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('/complaint/approved', 'Restful\ComplaintController@indexApproved');
     Route::get('/complaint/decline', 'Restful\ComplaintController@indexDecline');
     Route::get('/complaint/waiting', 'Restful\ComplaintController@indexWaiting');
+    Route::get('/complaint/finished', 'Restful\ComplaintController@indexFinished');
     Route::get('/complaint/by-user', 'Restful\ComplaintController@complaintByUser');
 
     Route::get('/complaint/{id}', 'Restful\ComplaintController@show');
