@@ -115,7 +115,7 @@ class ComplaintController extends Controller
     }
 
     public function indexFinished() {
-        $complaints = Complaint::with('complaintCategory','user')->where('status', 'finished')->orderBy('created_at')->get();
+        $complaints = Complaint::with('complaintCategory','user')->where('status', 'Finished')->orderBy('created_at')->get();
 
         $results = array();
         foreach($complaints as $complaint){
