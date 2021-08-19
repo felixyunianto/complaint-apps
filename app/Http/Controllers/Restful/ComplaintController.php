@@ -48,6 +48,8 @@ class ComplaintController extends Controller
                 'user' => $complaint->user->name,
                 'status' => $complaint->status,
                 'complaint_image' => $complaint->complaint_image,
+                'latitude' => $complaint->latitude,
+                'longitude' => $complaint->longitude,
                 'created_at' => $complaint->created_at->diffForHumans(),
                 'updated_at' => $complaint->updated_at->diffForHumans()
             ];
@@ -72,6 +74,8 @@ class ComplaintController extends Controller
                 'user' => $complaint->user->name,
                 'status' => $complaint->status,
                 'complaint_image' => $complaint->complaint_image,
+                'latitude' => $complaint->latitude,
+                'longitude' => $complaint->longitude,
                 'created_at' => $complaint->created_at->diffForHumans(),
                 'updated_at' => $complaint->updated_at->diffForHumans()
             ];
@@ -96,6 +100,8 @@ class ComplaintController extends Controller
                 'user' => $complaint->user->name,
                 'status' => $complaint->status,
                 'complaint_image' => $complaint->complaint_image,
+                'latitude' => $complaint->latitude,
+                'longitude' => $complaint->longitude,
                 'created_at' => $complaint->created_at->diffForHumans(),
                 'updated_at' => $complaint->updated_at->diffForHumans()
             ];
